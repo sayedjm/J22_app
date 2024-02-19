@@ -1,0 +1,97 @@
+
+    <br>
+    <div class="container">
+        <h1 class="h3 mb-3 fw-normal">Persoonsgegevens</h1>
+        <div class="row g-3">
+            <div class="col-md-3">
+                <label for="first_name" class="form-label">Voorletter</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" required>
+ 		        <div class="invalid-feedback">Vul een voorletter in.</div>
+            </div>
+            <div class="col-md-3">
+                <label for="last_name" class="form-label">Achternaam</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" required>
+		<div class="invalid-feedback">Vul een achternaam in.</div>
+            </div>
+            <div class="col-md-3">
+                <label for="phone_number" class="form-label">Telefoonnummer</label>
+                <input type="tel" pattern=".{10}" class="form-control" id="phone_number" name="phone_number">
+		<div class="invalid-feedback">Vul een geldige telefoonnummer in.</div>
+            </div>
+            <div class="col-md-3">
+                <label for="email" class="form-label">E-mailadres</label>
+                <input type="email" class="form-control" id="email" name="email">
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <h1 class="h3 mb-3 fw-normal">Reparatie gegevens</h1>
+        <div class="row g-3">
+            <div class="col-md-3">
+                <label for="repair_number" class="form-label">Reparatie nummer</label>
+                <input type="number" inputmode="numeric" class="form-control" id="repair_number" name="repair_number" required>
+		<div class="invalid-feedback">Vul een reparatie nummer in.</div>
+            </div>
+  
+            <div class="col-md-3">
+                <label for="brand" class="form-label">Merk</label>
+                <input type="text" class="form-control" id="brand" name="brand" required>
+		<div class="invalid-feedback">Vul het merk in.</div>
+            </div>
+            <div class="col-md-3">
+                <label for="article" class="form-label">Artikelnummer</label>
+                <input type="text" class="form-control" id="article" name="article" required>
+		<div class="invalid-feedback">Vul het artikelnummer in.</div>
+            </div>
+	    <div class="col-md-3">
+                <label for="repairman" class="form-label">Versturen naar</label>
+                <input class="form-control" list="repairman_list" id="repairman" name="repairman" required>
+		<div class="invalid-feedback">Vul de reperateur in.</div>
+                <datalist id="repairman_list">
+                    <option value="Stamm">
+                    <option value="Citroen">
+                </datalist>
+            </div>
+            <div class="col-md-6">
+                <label for="repair_reason" class="form-label">Defect</label>
+                <textarea class="form-control" id="repair_reason" name="repair_reason" rows="3" style="resize: none;" required></textarea>
+                <div class="invalid-feedback">Vul de reden in.</div>
+	    </div>
+            <div class="col-md-6">
+                <label for="remark" class="form-label">Interne opmerkingen</label>
+                <textarea class="form-control" id="remark" name="remark" rows="3" style="resize: none;"></textarea>
+	    </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row g-3">
+             {% if request.path != '/new_repair' and request.path != '/insert' %}
+            <div class="col-md-3">
+                <label for="employee" class="form-label">Medewerker</label>
+                <input type="text" class="form-control" id="employee" name="employee" >
+            </div>
+            <div class="col-md-3">
+                <label for="price" class="form-label">Prijs</label>
+                <input type="number" class="form-control" id="price" name="price">
+            </div>
+            <div class="col-md-3">
+                <label for="date" class="form-label">Datum<span id="date-span" class="fst-italic"></span></label>
+                <input type="text" class="form-control" id="date" name="date" >
+            </div>
+            <div class="col-md-3">
+                <label for="emailed" class="form-label">Contact opgenomen<span id="contacted_date-span" class="fst-italic"></span></label>
+                <div class="input-group mb-3">
+			        <input type="text" class="form-control" id="emailed" name="emailed" readonly>
+  			        <button type="submit" id="reset_btn" name="button_repairs" value="reset" class="btn btn-outline-danger">Reset</button>
+		        </div>
+            </div>
+            <input type="text" class="form-control" id="status" name="status" hidden>
+            </div>
+            {% endif %}
+    </div>
+    <br>
+
+<script src="/static/script/timeline_repair.js"></script>
+

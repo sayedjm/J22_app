@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="dropdown">
+        <button aria-expanded="false" class="btn " data-bs-auto-close="outside"
+                data-bs-toggle="dropdown" type="button">
+            Logboek
+        </button>
+        <div class="dropdown-menu p-4">
+            <div>
+                <table class="table" id="repair-log">
+                    <thead>
+                    <tr>
+                        <th>Datum</th>
+                        <th>Handeling</th>
+                        <th>Medewerker</th>
+                    </tr>
+                    <thead>
+                    <tbody>
+                    {% for row in log_data %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[3] }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

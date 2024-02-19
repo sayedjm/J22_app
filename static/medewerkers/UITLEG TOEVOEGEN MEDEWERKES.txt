@@ -1,0 +1,5 @@
+Dennis 11
+Monique 15
+
+
+Vul de naam en vervolgens met een spatie de kassanummer.

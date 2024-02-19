@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="dropdown">
+        <button type="button" class="btn " data-bs-toggle="dropdown"
+                aria-expanded="false" data-bs-auto-close="outside">
+            Database settings
+        </button>
+        <div class="dropdown-menu p-4">
+            <div style="float: right;">
+                <div class="mb-3">
+                    <form action="/import" method="post">
+                        <label for="file_import" class="form-label">File importeren</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" name="file_import" id="file_import" >
+                            <button class="btn btn-secondary" type="submit">Import</button>
+                        </div>
+                    </form>
+                </div>
+                <form action="/export" method="post">
+                    <label for="file_export" class="form-label">File exporteren</label>
+                    <div class="input-group">
+                        <select class="form-select" id="file_export" name="file_export">
+                            <option value="repairs">Lopende reparaties</option>
+                            <option value="old_repairs">Opgehaalde reparaties</option>
+                        </select>
+                        <button class="btn btn-secondary" type="submit">Export</button>
+                    </div>
+                 </form>
+            </div>
+        </div>
+    </div>
+</div>

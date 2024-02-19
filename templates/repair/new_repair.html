@@ -1,0 +1,31 @@
+{% extends 'sharedTemplates/base.html' %}
+{% block title %}Nieuwe reparatie{% endblock %}
+{% block body %}
+
+    {% if repair_number_exists %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            Dit reparatienummer bestaat al. Kies een ander reparatienummer.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+
+    <form action="/insert_repair" method="POST" id="form" class="needs-validation" novalidate>
+        {% include 'sharedTemplates/repair/repair_form.html' %}
+        {% if repair_number_exists %}
+            {% for key, value in data.items() %}
+                <script>
+                    document.getElementsByName("{{ key }}")[0].value = "{{ value }}";
+                </script>
+            {% endfor %}
+        {% endif %}
+        <script>
+            document.getElementById("date").readOnly = true;
+        </script>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-primary">Toevoegen</button>
+        </div>
+    </form>
+<br>
+<br>
+<script src="/static/script/validatie.js"></script>
+{% endblock %}

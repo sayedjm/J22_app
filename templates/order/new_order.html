@@ -1,0 +1,18 @@
+{% extends 'sharedTemplates/base.html' %}
+{% block title %}Nieuwe bestelling{% endblock %}
+{% block body %}
+    <form action="/insert_order" method="POST" id="form"
+          class="needs-validation" novalidate>
+        {% include 'sharedTemplates/order/order_form.html' %}
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-primary">Toevoegen</button>
+        </div>
+    </form>
+<br>
+<br>
+
+<script src="/static/script/enter.js"></script>
+<script src="/static/script/validatie.js"></script>
+<script src="/static/script/tijdlijn.js"></script>
+
+{% endblock %}

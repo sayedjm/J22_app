@@ -1,0 +1,64 @@
+{% extends 'sharedTemplates/base.html' %}
+{% block title %}Nieuwe reparatie{% endblock %}
+{% block body %}
+
+<div class="position-absolute top-50 start-50 translate-middle">
+
+    <div class="container"></div>
+
+
+        <form method="POST">
+        
+   <div class="row row-cols-1 row-cols-md-4 g-4">    
+<div class="col">     
+<div class="card h-100">
+ 
+   <div class="card-body">
+      <p class="card-text">Nieuwe reparatie invoeren.</p>
+   </div>
+   <div class="card-footer">
+      <a href="/new_repair"> <button name="button_home" value="repair" type="submit" class="btn btn-primary w-100 py-2">Reparatie</button></a>
+   </div>
+</div>
+</div>
+<div class="col">
+   <div class="card h-100">
+      <div class="card-body">
+         <p class="card-text">Nieuwe bestelling invoeren.</p>
+      </div>
+      <div class="card-footer">
+         <a href="/new_order"> <button name="button_home" value="order" type="submit" class="btn btn-secondary w-100 py-2">Bestelling</button></a>
+      </div>
+   </div>
+</div>
+<div class="col">
+   <div class="card h-100">
+      <div class="card-body">
+         <p class="card-text">Lopende reparaties bekijken.</p>
+      </div>
+      <div class="card-footer">
+         <a href="/get_repair"> <button name="button_home" value="get_repair" type="submit" class="btn btn-primary w-100 py-2">Lopende reparatie</button></a>
+      </div>
+   </div>
+</div>
+<div class="col">
+   <div class="card h-100">
+      <div class="card-body">
+         <p class="card-text">Lopende bestellingen bekijken.</p>
+      </div>
+      <div class="card-footer">
+         <a href="/get_order"> <button name="button_home" value="get_order" type="submit" class="btn btn-secondary w-100 py-2">lopende Bestelling</button></a>
+      </div>
+   </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+        </form>
+    </div>
+</div>
+{% endblock %}

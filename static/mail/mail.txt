@@ -1,0 +1,9 @@
+Beste heer, mevrouw {},
+
+Uw reparatie met reparatienummer {} is gereed en kan in onze winkel worden opgehaald.
+De kosten voor deze reparatie zijn € {},- en kunt u middels pin of contant in de winkel voldoen. Indien het te betalen bedrag € 0,- aangeeft dan is de reparatie uitgevoerd onder garantie en zijn er dus geen kosten verbonden aan deze reparatie. We willen u vriendelijk vragen de reparatie binnen 14 dagen op te halen, mocht dit niet mogelijk zijn dan horen we dit graag.
+Vergeet u niet uw afgiftebewijs mee te nemen, zonder afgiftebewijs kunnen wij de goederen helaas niet meegeven.
+
+Met vriendelijke groet,
+
+Team J22

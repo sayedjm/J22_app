@@ -1,0 +1,44 @@
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a href="/home"><img src="/static/png/img.png" alt="J22" width="75"
+                             height="30" class="navbar-brand"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+    		<li><a class="nav-link {% if request.path == '/new_repair' %}active{% endif %} " href="/new_repair">Nieuwe reparatie</a></li>
+                <li><a class="nav-link {% if request.path == '/new_order' %}active{% endif %}" href="/new_order">Nieuwe bestellingen</a></li>
+		<li><a class="nav-link {% if request.path == '/get_repair' %}active{% endif %} " href="/get_repair">Lopende reparaties</a></li>
+                <li><a class="nav-link {% if request.path == '/get_order' %}active{% endif %}" href="/get_order">Lopende bestellingen</a></li>	
+             	<div class="vr" style="background-color: white;"></div>
+		<li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Archief</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link {% if request.path == '/get_old_repair' %}active{% endif %} dropdown-item" href="/get_old_repair">Afgeronde reparaties</a></li>
+                            <li><a class="nav-link {% if request.path == '/get_old_order' %}active{% endif %} dropdown-item" href="/get_old_order">Afgeronde bestellingen</a></li>
+                        </ul>
+                </li>
+
+	    </div>
+  
+                       <div class="navbar-nav ms-auto">
+            	<li><a class="nav-link" href="/logout">
+                                    
+
+
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="30" fill="white" class="bi bi-person-circle" viewBox="0 0 16 16">
+  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+</svg>
+
+                    {% if current_user.is_authenticated %}
+                        {{ current_user.id }}
+                    {% endif %}
+                </a></li>
+            </div>
+        </div>
+    </div>
+</nav>
+

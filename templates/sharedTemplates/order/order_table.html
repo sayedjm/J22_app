@@ -1,0 +1,159 @@
+<div class="container">
+    <br>
+    <div class="d-flex justify-content-between">
+        <h1 class="h3 mb-3 fw-normal">
+            {% if table == "orders" %}
+            Lopende bestellingen
+            {% else %}
+            Afgeronde bestellingen
+            {% endif %}
+        </h1>
+    <div>
+            <div class="input-group">
+        	<span class="input-group-text" id="basic-addon1">
+            	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+               	<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg></span>
+                <input class="form-control" type="search" id="search-box" name="search" onkeyup="searchTable()" autofocus>
+            </div>
+  	</div>
+	</div>
+
+    <table class="table" id="order-table">
+        <thead>
+        <tr>
+            <th onclick="sortTable(0)">Datum</th>
+            <th onclick="sortTable(1)">Voorletter</th>
+            <th onclick="sortTable(2)">Achternaam</th>
+            <th onclick="sortTable(3)">Merk</th>
+            <th onclick="sortTable(4)">Artikel</th>
+            {% if table == "orders" %}
+            <th onclick="sortTable(5)">Status</th>
+            {% endif %}
+            <th>Selecteer</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in data %}
+        <tr>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[4] }}</td>
+            <td>{{ row[5] }}</td>
+            <td>{{ row[6] }}</td>
+            <td>{{ row[7] }}</td>
+            {% if table == "orders" %}
+            <td>
+                {% if row[8] == "implemented" %}
+                <button class="btn btn-warning btn-sm" style="width: 150px;">Nog te bestellen
+                </button>
+                {% elif row[8] == "ordered" %}
+                <button class="btn btn-secondary btn-sm" style="width: 150px;">Product besteld
+                </button>
+                {% elif row[8] == "contacted" %}
+                <button class="btn btn-success btn-sm" style="width: 150px;">Wachten voor ophaal
+                </button>
+                {% endif %}
+            </td>
+            {% endif %}
+            <td>
+                <form action="{{ url_for('select_row') }}" method="POST">
+                    <input name="row_id" type="hidden" value="{{ row[0] }}">
+                    <input name="table" type="hidden" value="{{ table }}">
+                    <button class="btn btn-primary btn-sm" type="submit">
+                        Select
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function searchTable() {
+        const input = document.getElementById("search-box");
+        const table = document.getElementById("order-table");
+        const filter = input.value.toUpperCase();
+        const rows = table.getElementsByTagName("tr");
+        for (let i = 0; i < rows.length; i++) {
+            const td = rows[i].getElementsByTagName("td");
+            for (let j = 0; j < td.length; j++) {
+                const cell = td[j];
+                if (cell) {
+                    const text = cell.textContent || cell.innerText;
+                    if (text.toUpperCase().indexOf(filter) > -1) {
+                        rows[i].style.display = "";
+                        break;
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    }
+</script>
+<script>
+   function sortTable(columnIndex) {
+        const table = document.getElementById("order-table");
+        const rows = Array.from(table.rows).slice(1); // Exclude the header row from sorting
+        const headerRow = table.rows[0];
+        const clickedHeaderCell = headerRow.cells[columnIndex];
+        const isAscending = clickedHeaderCell.classList.toggle("asc");
+
+        for (let i = 0; i < headerRow.cells.length; i++) {
+            if (i !== columnIndex) {
+                headerRow.cells[i].classList.remove("asc");
+                headerRow.cells[i].classList.remove("desc");
+            }
+        }
+
+        if (isAscending) {
+            clickedHeaderCell.classList.add("asc");
+        } else {
+            clickedHeaderCell.classList.add("desc");
+        }
+
+        const clickedHeaderCells = table.getElementsByClassName("clicked-header");
+        while (clickedHeaderCells.length > 0) {
+            clickedHeaderCells[0].classList.remove("clicked-header");
+        }
+
+        clickedHeaderCell.classList.add("clicked-header");
+
+        rows.sort((rowA, rowB) => {
+            const cellA = rowA.cells[columnIndex].innerText;
+            const cellB = rowB.cells[columnIndex].innerText;
+
+            if (isNaN(cellA) || isNaN(cellB)) {
+                return cellA.localeCompare(cellB);
+            } else {
+                return parseFloat(cellA) - parseFloat(cellB);
+            }
+        });
+
+        if (!isAscending) {
+            rows.reverse();
+        }
+
+        for (let i = 0; i < rows.length; i++) {
+            table.tBodies[0].appendChild(rows[i]);
+        }
+    }
+</script>
+<style>
+    .asc::after {
+        content: "↑";
+        display: inline-block;
+        margin-left: 5px;
+    }
+
+    .desc::after {
+        content: "↓";
+        display: inline-block;
+        margin-left: 5px;
+    }
+
+    .clicked-header {
+        color: blue;
+    }
+</style>

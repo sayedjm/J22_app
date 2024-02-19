@@ -1,0 +1,45 @@
+{%  extends 'sharedTemplates/base.html' %}
+{% block title %}Repair: {{ data.repair_number }}{% endblock %}
+{% block body %}
+
+<style>
+.bottom-buttons button{
+    width: 25%;
+    height: 5%;
+    padding: 2px;
+    margin: 5px;
+}
+</style>
+
+    {% if error_message %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            {{ error_message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+
+    <form action="/repair_buttons" method="POST">
+
+        {% include 'sharedTemplates/repair/repair_form.html' %}
+
+        {% for key, value in data.items() %}
+            <script>
+                document.getElementsByName("{{ key }}")[0].value = "{{ value | safe}}";
+                document.getElementById("date").readOnly = true;
+                document.getElementById("repair_number").readOnly = true;
+            </script>
+        {% endfor %}
+
+        <div class="container">
+            <div class="d-flex justify-content-between bottom-buttons">
+                <button type="submit" id="updatel_btn" name="button_repairs" value="update" class="btn btn-warning" >Update</button>
+                <button type="submit" id="mail_btn" name="button_repairs" value="mail" class="btn btn-primary" >Mail</button>
+                <button type="submit" id="call_btn" name="button_repairs" value="call" class="btn btn-primary" >Gebeld</button>
+                <button type="submit" id="print_btn" name="button_repairs" value="label" class="btn btn-primary" >Print</button>
+                <button type="submit" id="fetched_btn" name="button_repairs" value="fetched" class="btn btn-success">Opgehaald</button>
+            </div>
+        </div>
+          {% include 'sharedTemplates/repair/repair_log.html' %}
+    </form>
+
+{% endblock %}

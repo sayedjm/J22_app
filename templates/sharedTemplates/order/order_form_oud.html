@@ -1,0 +1,123 @@
+<br>
+<div class="container">
+    <h1 class="h3 mb-3 fw-normal">Persoonsgegevens</h1>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <label class="form-label" for="first_name">Voorletter</label>
+            <input class="form-control" id="first_name" name="first_name"
+                   required type="text">
+            <div class="invalid-feedback">Vul een geldige voorletter in.</div>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label" for="last_name">Achternaam</label>
+            <input class="form-control" id="last_name" name="last_name"
+                   required type="text">
+            <div class="invalid-feedback">Vul een geldige achternaam in.</div>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label no-print" for="phone_number">Telefoonnummer</label>
+            <input class="form-control no-print" id="phone_number" name="phone_number"
+                   pattern=".{10}" type="tel">
+            <div class="invalid-feedback">Vul een geldige telefoonnummer in.
+            </div>
+        </div>
+        <div class="col-md-6" hidden>
+            <label class="form-label no-print" for="email">E-mailadres</label>
+            <input class="form-control no-print" id="email" name="email"
+                   type="email">
+        </div>
+    </div>
+</div>
+<br>
+<div class="container">
+    <h1 class="h3 mb-3 fw-normal no-print">Bestelgegevens</h1>
+    <div class="row g-3">
+        <div class="col-md-3">
+            <label class="form-label no-print" for="brand">Merk</label>
+            <input class="form-control no-print" id="brand" list="brands_list"
+                   name="brand" required type="text">
+            <datalist id="brands_list">
+                <option value=""></option>
+                {% for brand in brands %}
+                <option value="{{brand}}">{{ brand }}</option>
+                {% endfor %}
+            </datalist>
+            <div class="invalid-feedback">Vul het merk in.</div>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label no-print"
+                   for="article">Artikelnummer</label>
+            <input class="form-control no-print" id="article" name="article"
+                   required type="text">
+            <div class="invalid-feedback">Vul het artikelnummer in.</div>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label no-print" for="size">Maat</label>
+            <input class="form-control no-print" id="size" name="size"
+                   required type="text">
+            <div class="invalid-feedback">Vul de maat in.</div>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label no-print" for="price">Prijs</label>
+            <input class="form-control no-print" id="price" max="10000.00" min="0.00"
+                   name="price" step="0.01" type="number">
+            <div class="invalid-feedback no-print">Vul de prijs in.</div>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label" for="paid">Betaald</label>
+            <select class="form-select" id="paid" name="paid" required>
+                <option selected></option>
+                <option value="yes">Ja</option>
+                <option value="no">Nee</option>
+                <option value="voucher">Tegoedbon</option>
+            </select>
+            <div class="invalid-feedback">Vul of er betaald is in.</div>
+        </div>
+    </div>
+    <br>
+    <div class="col-md-12">
+        <label class="form-label no-print" for="remark">Notities</label>
+        <textarea class="form-control no-print" id="remark" name="remark"
+                  rows="3" style="resize: none;"></textarea>
+    </div>
+</div>
+<br>
+<div class="container">
+    {% if request.path != '/new_order' and request.path != '/insert' %}
+    <h1 class="h3 mb-3 fw-normal no-print">Tijdlijn</h1>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <label class="form-label no-print" for="implemented_date">Invoering<span
+                    class="fst-italic"
+                    id="implemented_date-span"></span></label>
+            <input class="form-control no-print" id="implemented_date"
+                   name="implemented_date" readonly type="text">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label no-print"
+                   for="ordered_date">Bestelling<span
+                    class="fst-italic" id="ordered_date-span"></span></label>
+            <input class="form-control no-print" id="ordered_date" name="ordered_date"
+                   readonly type="text">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label" for="contacted_date">Contact
+                opgenomen<span class="fst-italic no-print"
+                               id="contacted_date-span"></span></label>
+            <input class="form-control" id="contacted_date" name="contacted_date"
+                   readonly type="text">
+        </div>
+    </div>
+    <input class="form-control no-print" hidden id="status" name="status"
+           type="text">
+    <input class="form-control no-print" hidden id="order_number"
+           name="order_number" type="text">
+    <input class="form-control no-print" hidden id="fetched_date"
+           name="fetched_date" type="text">
+    <input class="form-control no-print" hidden id="employee"
+           name="employee" type="text">
+    {% endif %}
+</div>
+<br>
+
+<script src="/static/script/timeline_order.js"></script>

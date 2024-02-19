@@ -1,0 +1,49 @@
+{%  extends 'sharedTemplates/base.html' %}
+{% block title %}Bestelling{% endblock %}
+{% block body %}
+ <style>
+    @media print {
+      .no-print {
+        display: none;
+      }
+    }
+  </style>
+
+    {% if error_message %}
+        <div class="alert alert-danger alert-dismissible no-print" role="alert">
+            {{ error_message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+
+    <form action="/order_buttons" method="POST" id="form" class="needs-validation" novalidate>
+
+        {% include 'sharedTemplates/order/order_form.html' %}
+
+        {% for key, value in data.items() %}
+            <script>
+                document.getElementsByName("{{ key }}")[0].value = "{{ value | safe }}";
+            </script>
+        {% endfor %}
+
+        <div class="container no-print">
+            <div class="d-flex justify-content-center bottom-buttons">
+                <button type="submit" id="updatel_btn" name="order_buttons" value="update" class="btn btn-secondary">Update</button>
+                <button type="submit" id="ordered_btn" name="order_buttons" value="ordered" class="btn btn-warning">Besteld</button>
+                <button type="submit" id="contacted_btn" name="order_buttons" value="contacted" class="btn btn-warning">Gebeld</button>
+                <button type="submit" id="print_btn" name="order_buttons" value="print"class= "btn btn-secondary" >Print</button>
+                <button type="submit" id="fetched_btn" name="order_buttons" value="fetched" class="btn btn-success">Opgehaald</button>
+            </div>
+        </div>
+        {% include 'sharedTemplates/order/order_log.html' %}
+
+    </form>
+    <script src="/static/script/enter.js"></script>
+    <script src="/static/script/validatie.js"></script>
+
+ <script>
+    function printPage() {
+      window.print();
+    }
+  </script>
+{% endblock %}

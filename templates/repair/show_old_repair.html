@@ -1,0 +1,23 @@
+{% extends 'sharedTemplates/base.html' %}
+{% block title %}Repair: {{ data.repair_number }}{% endblock %}
+{% block body %}
+    <form action="/button_checker_old_repair" method="POST">
+        {% include 'sharedTemplates/repair/repair_form.html' %}
+        {% for key, value in data.items() %}
+            <script>
+                document.getElementsByName("{{ key }}")[0].value = "{{ value | safe }}";
+                document.getElementById("{{ key }}").readOnly = true;
+            </script>
+        {% endfor %}
+        <div class="container">
+            <div class="d-flex justify-content-between bottom-buttons">
+                <button type="submit" name="button_old_repair" value="back" class="btn btn-primary">Terug</button>
+                <button type="submit" name="button_old_repair" value="move_repair_back" class="btn btn-primary">Zet reparatie terug</button>
+            </div>
+        </div>
+        {% include 'sharedTemplates/repair/repair_log.html' %}    </form>
+
+{% endblock %}
+
+
+
