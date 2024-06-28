@@ -1,9 +1,10 @@
 import configparser
 import datetime
+
 import os
 import pythoncom
 
-from flask import Flask, render_template, request, redirect, make_response
+from flask import Flask, render_template, request, redirect, make_response, session
 from flask_login import LoginManager, login_required, login_user, \
     logout_user, current_user, UserMixin
 
@@ -15,6 +16,8 @@ config.read('config.ini')
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)
+#app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(minutes=0.5)
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -68,6 +71,7 @@ def login():
 @app.route('/logout')
 @login_required
 def logout():
+    session.clear()
     logout_user()
     return redirect("/")
 
@@ -480,8 +484,8 @@ def internal_server_error(error):
     :return: render_template met error.html template en de error van HTML.
     """
     # error_log(erroSr)
-    return render_template('error.html', error=error), 401
+    return redirect("/login")
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host="0.0.0.0",port=5000, debug=True)
