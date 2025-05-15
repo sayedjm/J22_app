@@ -1,10 +1,7 @@
 import configparser
 import sqlite3
-
+import os
 from datetime import date, datetime
-
-from mail import send_mail
-
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -133,7 +130,7 @@ def connection():
     retourneer een connectie en een cursor.
     :return: Een tuple met de connectie en de cursor.
     """
-    conn = sqlite3.connect('database/database.db')
+    conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     return conn, cursor
 
@@ -143,6 +140,8 @@ def create_table():
     Maak de tabellen in de database wanneer ze
     nog niet bestaan.
     """
+    if not os.path.exists("database"):
+        os.makedirs("database")
     conn, cursor = connection()
     cursor.execute(TABLE_REPAIR)
     cursor.execute(TABLE_OLD_REPAIR)
@@ -197,8 +196,7 @@ def get_repair(table, repair_number):
 
 def get_order(table, repair_number):
     conn, cursor = connection()
-    cursor.execute("SELECT * FROM {} WHERE order_number=?".format(table),
-                   (repair_number,))
+    cursor.execute("SELECT * FROM {} WHERE order_number=?".format(table),(repair_number,))
     result = list(cursor.fetchone())
     conn.close()
     data = {
@@ -233,8 +231,7 @@ def get_table_data_repair(table):
     aantal reparaties.
     """
     conn, cursor = connection()
-    cursor.execute("SELECT repair_number, date, first_name,"
-                   " last_name, brand, article, status FROM {}".format(table))
+    cursor.execute("SELECT repair_number, date, first_name, last_name, brand, article, status FROM {}".format(table))
     data = cursor.fetchall()
     current_date = date.today()
     data2 = []
@@ -314,13 +311,6 @@ def update_order(order_number, data):
 
 
 def mail_status(repair_number, price):
-    """
-    Werk de status en prijs van een reparatie bij in de 'repairs' tabel.
-
-    :param repair_number: Het reparatienummer van de reparatie die
-    moet worden bijgewerkt.
-    :param price: De nieuwe prijs van de reparatie.
-    """
     c_date = date.today().strftime("%d-%m-%Y")
     conn, cursor = connection()
     cursor.execute('''UPDATE repairs SET status = ?, price = ?, emailed = ? WHERE repair_number = ?''', (*["finish", price, c_date], repair_number))
@@ -329,12 +319,6 @@ def mail_status(repair_number, price):
 
 
 def call_status(repair_number):
-    """
-    Werk de status  van een reparatie bij in de 'repairs' tabel.
-
-    :param repair_number: Het reparatienummer van de reparatie die
-    moet worden bijgewerkt.
-    """
     c_date = date.today().strftime("%d-%m-%Y")
     conn, cursor = connection()
     cursor.execute('''UPDATE repairs SET status = ?, emailed = ? WHERE repair_number = ?''', (*["finish", c_date], repair_number))
@@ -474,7 +458,7 @@ def een():
     conn = sqlite3.connect('database/oud.db')
     cursor = conn.cursor()
 
-    conn2 = sqlite3.connect('database/database.db')
+    conn2 = sqlite3.connect('database.db')
     cursor2 = conn2.cursor()
 
     cursor.execute(f'SELECT * FROM repairs')
@@ -499,6 +483,3 @@ def een():
 
     conn2.commit()
     conn2.close()
-
-if __name__ == '__main__':
-    een()

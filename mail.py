@@ -1,4 +1,4 @@
-import win32com.client
+#import win32com.client
 
 def send_mail(mail_address, repair_number, last_name, price, reminder=False):
     """
@@ -11,8 +11,8 @@ def send_mail(mail_address, repair_number, last_name, price, reminder=False):
     """
     with open("static/mail/mail.txt", "r", encoding="utf-8") as file:
         mail_template = file.read()
-    outlook = win32com.client.Dispatch('outlook.application')
-    mail = outlook.CreateItem(0)
+    #outlook = win32com.client.Dispatch('outlook.application')
+    #mail = outlook.CreateItem(0)
     mail.To = mail_address
     if reminder:
         mail.Subject = "Reparatiestatus J22 heringeren"

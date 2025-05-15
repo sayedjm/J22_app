@@ -2,13 +2,12 @@ import configparser
 import datetime
 
 import os
-import pythoncom
 
 from flask import Flask, render_template, request, redirect, make_response, session
-from flask_login import LoginManager, login_required, login_user, \
-    logout_user, current_user, UserMixin
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user, UserMixin
 
 import database
+database.create_table()
 from mail import send_mail
 
 config = configparser.ConfigParser()
@@ -16,7 +15,6 @@ config.read('config.ini')
 
 app = Flask(__name__)
 app.secret_key = os.urandom(12)
-#app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(minutes=0.5)
 
 
 login_manager = LoginManager()
@@ -61,7 +59,6 @@ def login():
 
             response = make_response(redirect("/home"))
             response.set_cookie('username', user_name)
-
             return response
         else:
             return render_template("login.html", error_messenger=True)
@@ -488,4 +485,4 @@ def internal_server_error(error):
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=5000, debug=True)
+    app.run(host="0.0.0.0",port=5005, debug=True)
