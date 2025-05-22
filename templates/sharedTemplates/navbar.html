@@ -1,23 +1,22 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
     <div class="container-fluid">
-        <a href="/home"><img src="/static/png/img.png" alt="J22" width="75"
-                             height="30" class="navbar-brand"></a>
+        <a href="/home"><img src="/static/png/logo.svg" alt="BikeLust, E-Bikes & Espresso" width="75" height="30" class="navbar-brand"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-    		<li><a class="nav-link {% if request.path == '/new_repair' %}active{% endif %} " href="/new_repair">Nieuwe reparatie</a></li>
-                <li><a class="nav-link {% if request.path == '/new_order' %}active{% endif %}" href="/new_order">Nieuwe bestellingen</a></li>
-		<li><a class="nav-link {% if request.path == '/get_repair' %}active{% endif %} " href="/get_repair">Lopende reparaties</a></li>
-                <li><a class="nav-link {% if request.path == '/get_order' %}active{% endif %}" href="/get_order">Lopende bestellingen</a></li>	
+    		<li><a class="nav-link {% if request.path == '/new_repair' %}active{% endif %} " href="/new_repair">Neue reparatur</a></li>
+                <li><a class="nav-link {% if request.path == '/new_order' %}active{% endif %}" href="/new_order">Neue aufträge</a></li>
+		<li><a class="nav-link {% if request.path == '/get_repair' %}active{% endif %} " href="/get_repair">Laufende reparatur</a></li>
+                <li><a class="nav-link {% if request.path == '/get_order' %}active{% endif %}" href="/get_order">Laufende aufträge</a></li>
              	<div class="vr" style="background-color: white;"></div>
 		<li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Archief</a>
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Archiv</a>
                         <ul class="dropdown-menu">
-                            <li><a class="nav-link {% if request.path == '/get_old_repair' %}active{% endif %} dropdown-item" href="/get_old_repair">Afgeronde reparaties</a></li>
-                            <li><a class="nav-link {% if request.path == '/get_old_order' %}active{% endif %} dropdown-item" href="/get_old_order">Afgeronde bestellingen</a></li>
+                            <li><a class="nav-link {% if request.path == '/get_old_repair' %}active{% endif %} dropdown-item" href="/get_old_repair">Abgeschlossen reparatur</a></li>
+                            <li><a class="nav-link {% if request.path == '/get_old_order' %}active{% endif %} dropdown-item" href="/get_old_order">Abgeschlossen aufträge</a></li>
                         </ul>
                 </li>
 

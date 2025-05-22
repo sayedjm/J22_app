@@ -1,121 +1,97 @@
 <br>
 <div class="container">
-    <h1 class="h3 mb-3 fw-normal">Persoonsgegevens</h1>
+    <h1 class="h3 mb-3 fw-normal">Personendaten</h1>
     <div class="row g-3">
         <div class="col-md-4">
-            <label class="form-label" for="first_name">Voorletter</label>
-            <input class="form-control" id="first_name" name="first_name"
-                   required type="text">
-            <div class="invalid-feedback">Vul een geldige voorletter in.</div>
+            <label class="form-label" for="first_name">Anfangsbuchstabe</label>
+            <input class="form-control" id="first_name" name="first_name" required type="text">
+            <div class="invalid-feedback">Bitte einen gültigen Anfangsbuchstaben eingeben.</div>
         </div>
         <div class="col-md-4">
-            <label class="form-label" for="last_name">Achternaam</label>
-            <input class="form-control" id="last_name" name="last_name"
-                   required type="text">
-            <div class="invalid-feedback">Vul een geldige achternaam in.</div>
+            <label class="form-label" for="last_name">Nachname</label>
+            <input class="form-control" id="last_name" name="last_name" required type="text">
+            <div class="invalid-feedback">Bitte einen gültigen Nachnamen eingeben.</div>
         </div>
         <div class="col-md-4">
-            <label class="form-label no-print" for="phone_number">Telefoonnummer</label>
-            <input class="form-control no-print" id="phone_number" name="phone_number"
-                   pattern=".{10}" type="tel">
-            <div class="invalid-feedback">Vul een geldige telefoonnummer in.
-            </div>
+            <label class="form-label no-print" for="phone_number">Telefonnummer</label>
+            <input class="form-control no-print" id="phone_number" name="phone_number" pattern=".{10}" type="tel">
+            <div class="invalid-feedback">Bitte eine gültige Telefonnummer eingeben.</div>
         </div>
         <div class="col-md-6" hidden>
-            <label class="form-label no-print" for="email">E-mailadres</label>
-            <input class="form-control no-print" id="email" name="email"
-                   type="email">
+            <label class="form-label no-print" for="email">E-Mail-Adresse</label>
+            <input class="form-control no-print" id="email" name="email" type="email">
         </div>
     </div>
 </div>
 <br>
 <div class="container">
-    <h1 class="h3 mb-3 fw-normal no-print">Bestelgegevens</h1>
+    <h1 class="h3 mb-3 fw-normal no-print">Bestelldaten</h1>
     <div class="row g-3">
         <div class="col-md-3">
-            <label class="form-label no-print" for="brand">Merk</label>
-            <input class="form-control no-print" id="brand" list="brands_list"
-                   name="brand" required type="text">
+            <label class="form-label no-print" for="brand">Marke</label>
+            <input class="form-control no-print" id="brand" list="brands_list" name="brand" required type="text">
             <datalist id="brands_list">
                 <option value=""></option>
                 {% for brand in brands %}
                 <option value="{{brand}}">{{ brand }}</option>
                 {% endfor %}
             </datalist>
-            <div class="invalid-feedback">Vul het merk in.</div>
+            <div class="invalid-feedback">Bitte eine Marke eingeben.</div>
         </div>
         <div class="col-md-3">
-            <label class="form-label no-print"
-                   for="article">Artikelnummer</label>
-            <input class="form-control no-print" id="article" name="article"
-                   required type="text">
-            <div class="invalid-feedback">Vul het artikelnummer in.</div>
+            <label class="form-label no-print" for="article">Artikelnummer</label>
+            <input class="form-control no-print" id="article" name="article" required type="text">
+            <div class="invalid-feedback">Bitte die Artikelnummer eingeben.</div>
         </div>
         <div class="col-md-2">
-            <label class="form-label no-print" for="size">Maat</label>
-            <input class="form-control no-print" id="size" name="size"
-                   required type="text">
-            <div class="invalid-feedback">Vul de maat in.</div>
+            <label class="form-label no-print" for="size">Größe</label>
+            <input class="form-control no-print" id="size" name="size" required type="text">
+            <div class="invalid-feedback">Bitte die Größe eingeben.</div>
         </div>
         <div class="col-md-2">
-            <label class="form-label no-print" for="price">Prijs</label>
-            <input class="form-control no-print" id="price" max="10000.00" min="0.00"
-                   name="price" step="0.01" type="number">
-            <div class="invalid-feedback no-print">Vul de prijs in.</div>
+            <label class="form-label no-print" for="price">Preis</label>
+            <input class="form-control no-print" id="price" max="10000.00" min="0.00" name="price" step="0.01" type="number">
+            <div class="invalid-feedback no-print">Bitte den Preis eingeben.</div>
         </div>
         <div class="col-md-2">
-            <label class="form-label" for="paid">Betaald</label>
+            <label class="form-label" for="paid">Bezahlt</label>
             <select class="form-select" id="paid" name="paid" required>
                 <option selected></option>
                 <option value="yes">Ja</option>
-                <option value="no">Nee</option>
-                <option value="voucher">Tegoedbon</option>
+                <option value="no">Nein</option>
+                <option value="voucher">Gutschein</option>
             </select>
-            <div class="invalid-feedback">Vul of er betaald is in.</div>
+            <div class="invalid-feedback">Bitte den Zahlungsstatus auswählen.</div>
         </div>
     </div>
     <br>
     <div class="col-md-12">
-        <label class="form-label no-print" for="remark">Notities</label>
-        <textarea class="form-control no-print" id="remark" name="remark"
-                  rows="3" style="resize: none;"></textarea>
+        <label class="form-label no-print" for="remark">Notizen</label>
+        <textarea class="form-control no-print" id="remark" name="remark" rows="3" style="resize: none;"></textarea>
     </div>
 </div>
 <br>
 <div class="container">
     {% if request.path != '/new_order' and request.path != '/insert' %}
-    <h1 class="h3 mb-3 fw-normal no-print">Tijdlijn</h1>
+    <h1 class="h3 mb-3 fw-normal no-print">Zeitverlauf</h1>
     <div class="row g-3">
         <div class="col-md-4">
-            <label class="form-label no-print" for="implemented_date">Invoering<span
-                    class="fst-italic"
-                    id="implemented_date-span"></span></label>
-            <input class="form-control no-print" id="implemented_date"
-                   name="implemented_date" readonly type="text">
+            <label class="form-label no-print" for="implemented_date">Eingeführt am <span class="fst-italic" id="implemented_date-span"></span></label>
+            <input class="form-control no-print" id="implemented_date" name="implemented_date" readonly type="text">
         </div>
         <div class="col-md-4">
-            <label class="form-label no-print"
-                   for="ordered_date">Bestelling<span
-                    class="fst-italic" id="ordered_date-span"></span></label>
-            <input class="form-control no-print" id="ordered_date" name="ordered_date"
-                   readonly type="text">
+            <label class="form-label no-print" for="ordered_date">Bestellt am <span class="fst-italic" id="ordered_date-span"></span></label>
+            <input class="form-control no-print" id="ordered_date" name="ordered_date" readonly type="text">
         </div>
         <div class="col-md-4">
-            <label class="form-label" for="contacted_date">Contact
-                opgenomen<span class="fst-italic no-print"
-                               id="contacted_date-span"></span></label>
-            <input class="form-control" id="contacted_date" name="contacted_date"
-                   readonly type="text">
+            <label class="form-label" for="contacted_date">Kontakt aufgenommen <span class="fst-italic no-print" id="contacted_date-span"></span></label>
+            <input class="form-control" id="contacted_date" name="contacted_date" readonly type="text">
         </div>
     </div>
-    <input class="form-control no-print" hidden id="status" name="status"
-           type="text">
-    <input class="form-control no-print" hidden id="order_number"
-           name="order_number" type="text">
-    <input class="form-control no-print" hidden id="fetched_date"
-           name="fetched_date" type="text">
-    <input class="form-control no-print" hidden id="employee"
-           name="employee" type="text">
+    <input class="form-control no-print" hidden id="status" name="status" type="text">
+    <input class="form-control no-print" hidden id="order_number" name="order_number" type="text">
+    <input class="form-control no-print" hidden id="fetched_date" name="fetched_date" type="text">
+    <input class="form-control no-print" hidden id="employee" name="employee" type="text">
     {% endif %}
 </div>
 <br>

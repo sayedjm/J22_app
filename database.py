@@ -130,7 +130,7 @@ def connection():
     retourneer een connectie en een cursor.
     :return: Een tuple met de connectie en de cursor.
     """
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect('database/database.db')
     cursor = conn.cursor()
     return conn, cursor
 
@@ -431,7 +431,6 @@ def export_data_to_txt(table):
 
 
 def import_file_to_db(file_name, table, import_directory):
-
     conn, cursor = connection()
     with open(import_directory + file_name, "r") as file:
         header_file = file.readline().strip().split("\t")
@@ -451,35 +450,3 @@ def import_file_to_db(file_name, table, import_directory):
         else:
             conn.close()
             return True
-
-def een():
-    create_table()
-
-    conn = sqlite3.connect('database/oud.db')
-    cursor = conn.cursor()
-
-    conn2 = sqlite3.connect('database.db')
-    cursor2 = conn2.cursor()
-
-    cursor.execute(f'SELECT * FROM repairs')
-    rows = cursor.fetchall()
-    for r in rows:
-        cursor2.execute(TABLE_REPAIR_INSERT, r)
-
-    cursor.execute(f'SELECT * FROM old_repairs')
-    rows = cursor.fetchall()
-    for r in rows:
-        cursor2.execute(TABLE_OLD_REPAIR_INSERT, r[:15])
-
-    cursor.execute(f'SELECT * FROM orders')
-    rows = cursor.fetchall()
-    for r in rows:
-        cursor2.execute(TABLE_ORDERS_INSERT, (r[:14] + r[19:]))
-
-    cursor.execute(f'SELECT * FROM old_orders')
-    rows = cursor.fetchall()
-    for r in rows:
-        cursor2.execute(TABLE_OLD_ORDER_INSERT, (r[:14] + r[19:]))
-
-    conn2.commit()
-    conn2.close()
