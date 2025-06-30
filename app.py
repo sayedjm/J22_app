@@ -255,6 +255,7 @@ def print_label_repair(data):
         file.write("\t".join(["Nummer", "Datum", "Artikel", "Defect1", "Defect2", "Defect3" "naam", "Telefoonnummer"]) + "\n")
         file.write("\t".join(data2))
 
+
 def split_text(text, length):
     if len(text) <= length:
         return text, ""
@@ -370,6 +371,7 @@ def button_checker_orders():
     database.export_data_to_txt("old_orders")
     return redirect('/get_order')
 
+
 @app.route('/button_checker_old_repair', methods=['POST'])
 @login_required
 def button_checker_old_repair():
@@ -454,22 +456,22 @@ def get_brands():
 @app.route('/', methods=['POST'])
 @login_required
 def mail(data):
-    pythoncom.CoInitialize()
+    #pythoncom.CoInitialize()
     repair_number = data['repair_number']
     email = data['email']
     last_name = data['last_name']
     price = data['price']
     if repair_number and email and last_name and price:
         database.mail_status(repair_number, price)
-        send_mail(email, repair_number, last_name, price)
+        try:
+            send_mail(email, repair_number, last_name, price)
+        except:
+            pass
         user_log('mail', repair_number, current_user)
         redirect("/new_repair")
     else:
-        empty = [f for f, v in [('email', email),
-                                ('achternaam', last_name),
-                                ('prijs', price)] if not v]
-        error_message = "Volgende gegevens zijn leeg: {}. Vul " \
-                        "dit aan om te mailen!".format(", ".join(empty))
+        empty = [f for f, v in [('email', email), ('achternaam', last_name), ('prijs', price)] if not v]
+        error_message = "Volgende gegevens zijn leeg: {}. Vul dit aan om te mailen!".format(", ".join(empty))
         return error_message
 
 
@@ -480,7 +482,6 @@ def internal_server_error(error):
     :param error: de error van HTML
     :return: render_template met error.html template en de error van HTML.
     """
-    # error_log(erroSr)
     return redirect("/login")
 
 
